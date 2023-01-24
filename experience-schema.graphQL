@@ -1,0 +1,141 @@
+type Experience {
+ id: ID!
+ dateCreated: DateTime @search
+ subject: SubjectTuple!
+ title: String!
+ authors: [Authors!]!
+ collaborators: Collaborators
+ gradeLevel: GradeLevel!
+ experience: ExperienceType!
+ congnitive: CongnitiveType!
+ goal: String
+ background: String!
+ objectives: String
+ outcomes: String
+ productDeliverables: String
+ timeLine: [TimeLine]
+ assessments: [Assessment]
+ mainStudentInquireis: String
+ mainQuestions: String
+}
+
+enum SubjectDomain {
+ PE
+ Arts
+ Science
+ STEM
+ Humanities
+}
+
+enum SubjectInstance {
+ Painting
+ Sculpture
+ Photography
+ Digital
+ Music
+ Cinema
+ Theater
+ Math
+ Physics
+ Chemistry
+ Biology
+ Computer
+ History
+ Language
+ Literature
+}
+
+type SubjectTuple {
+ domain: SubjectDomain!
+ instance: SubjectInstance!
+}
+
+"""
+-. All signed-up users are Simple Users by default.
+-. A Simple user can create, read, update, and
+delete their OWN experiences.
+-. A simple user can read ANY experience.
+-. A Collaborator can EDIT and UPDATE
+ other authors’ experiences but not DELETE them.
+-. A super user is a user that can do EVERYTHING
+ , including deleting experiences.
+-. By default, there is only one superuser
+ in the system.
+-. Only a superuser can assign a superuser or collaborator role to other users.
+-. Only superusers can access the console page.
+-. A superuser can disable users.
+-. A disabled user will not be able to log in with the same user id.
+-. Users are authorized and authenticated in 3 ways:
+    1-. Local. Using Dgraph. Minimum Password length of 6 characters. Passwords are encrypted.
+    2-. Using Google
+    3-. Using Apple
+"""
+type Authors @secret(field: "pwd") {
+ firstName: String!
+ lastName: String!
+ email: String! @id
+ singInProvider: SingInProvider!
+ simpleUser: Boolean!
+ collaborator: Boolean!
+ superUser: Boolean!
+ active: Boolean!
+}
+
+type Collaborators @secret(field: "pwd") {
+ firstName: String!
+ lastName: String!
+ email: String! @id
+ singInProvider: SingInProvider!
+ simpleUser: Boolean!
+ collaborator: Boolean!
+ superUser: Boolean!
+ active: Boolean!
+}
+
+enum SingInProvider {
+ Google
+ Apple
+ Local
+}
+
+enum ExperienceType {
+ Project
+ Reading
+ Presentation
+ Writen
+ Test
+ Quiz
+ Exam
+}
+
+enum CongnitiveType {
+ Create
+ Evaluate
+ Analyze
+ Understand
+ Apply
+ Remember
+}
+
+type TimeLine {
+ id: ID!
+ startDate: DateTime!
+ endDate: DateTime!
+}
+
+enum GradeLevel {
+ Sixth
+ Seventh
+ Eighth
+ Nineth
+ Tenth
+ Eleventh
+ Twelveth
+}
+
+type Assessment {
+ id: ID!
+ title: String!
+ description: String!
+ date: DateTime!
+}

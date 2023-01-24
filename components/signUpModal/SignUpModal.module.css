@@ -1,0 +1,163 @@
+.modal {
+ position: absolute;
+ top: 0;
+ right: 0;
+ bottom: 0;
+ left: 0;
+ padding: 0px 20px;
+ background-color: rgba(0, 0, 0, 0.5);
+ display: flex;
+ align-items: center;
+ justify-content: center;
+}
+
+.modalContent {
+ display: flex;
+ flex-direction: column;
+ justify-content: center;
+ align-items: center;
+ width: 100%;
+ max-width: 296px;
+ align-items: center;
+ padding: 24px;
+ gap: 8px;
+ border: 1px solid #fffaf8;
+ box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.24);
+ border-radius: 16px;
+ background-color: #fffaf8;
+}
+
+.modalTitle {
+ font-family: 'Suez One';
+ font-style: normal;
+ font-weight: 400;
+ font-size: 24px;
+ line-height: 31px;
+ letter-spacing: -0.02em;
+ color: #292929;
+}
+
+.description {
+ text-align: center;
+ font-family: 'Syne';
+ font-style: normal;
+ font-weight: 400;
+ font-size: 14px;
+ line-height: 16px;
+ letter-spacing: 0.02em;
+ color: #292929;
+}
+
+.loginButton {
+ padding: 4px 8px;
+ margin-top: 16px;
+ width: 100%;
+ display: flex;
+ flex-direction: row;
+ justify-content: center;
+ align-items: center;
+ gap: 4px;
+ background: #f9eef8;
+ border: 1px solid #f9eef8;
+ box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.24);
+ border-radius: 8px;
+ cursor: pointer;
+}
+
+.loginButton span {
+ font-family: 'Syne';
+ font-style: normal;
+ font-weight: 700;
+ font-size: 12px;
+
+ display: flex;
+ align-items: center;
+ text-align: center;
+ letter-spacing: -0.02em;
+ text-transform: uppercase;
+ color: #292929;
+ flex: none;
+ order: 1;
+ flex-grow: 0;
+}
+
+.signUpButton {
+ width: 100%;
+
+ display: flex;
+ flex-direction: row;
+ justify-content: center;
+ align-items: center;
+ gap: 4px;
+ background: #ffffff;
+ border: 1px solid #e5e5e5;
+ box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.24);
+ border-radius: 8px;
+}
+
+.signUpButton span {
+ font-family: 'Syne';
+ font-style: normal;
+ font-weight: 700;
+ font-size: 12px;
+
+ display: flex;
+ align-items: center;
+ text-align: center;
+ letter-spacing: -0.02em;
+ text-transform: uppercase;
+ color: #292929;
+ flex: none;
+ order: 1;
+ flex-grow: 0;
+}
+
+.spaceBar {
+ width: 100%;
+ border: 1px solid #ffbfa3;
+ border-bottom: 0px;
+ margin: 16px 0px;
+}
+
+.formButton {
+ width: 100%;
+}
+
+.googleButton {
+ background-color: red;
+}
+
+@media (min-width: 640px) {
+ .modalTitle {
+  font-size: 36px;
+  line-height: 47px;
+  padding-bottom: 8px;
+ }
+
+ .description {
+  font-size: 18px;
+  line-height: 20px;
+  padding-bottom: 24px;
+ }
+
+ .modalContent {
+  max-width: 728px;
+  padding: 32px;
+ }
+
+ .formButton {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(5, auto-fit);
+  gap: 12px;
+ }
+
+ .loginButton {
+  grid-column: 1/-1;
+ }
+
+ .loginButton span {
+  font-size: 18px;
+  line-height: 20px;
+ }
+}

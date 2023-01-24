@@ -1,0 +1,189 @@
+.headerWrapper {
+ background-color: #ffebe1;
+ display: flex;
+ justify-content: center;
+}
+
+.headerContainer {
+ background: #ffebe1;
+ padding: 13px 0px;
+ padding-left: 24px;
+ padding-right: 24px;
+ padding-bottom: 26px;
+ gap: 32px;
+ width: 100%;
+}
+
+.headerContainer h1 {
+ display: flex;
+ padding: 40px 0px;
+ justify-content: center;
+ align-items: center;
+ padding-bottom: 30px;
+ flex: 1;
+ font-family: 'Suez One';
+ font-style: normal;
+ font-weight: 400;
+ font-size: 24px;
+ line-height: 31px;
+ letter-spacing: -0.02em;
+ margin: 0;
+ padding: 0;
+}
+
+.navContainer {
+ display: flex;
+ flex-direction: row;
+ justify-content: space-between;
+ align-items: center;
+}
+
+.navLogoContainer {
+ display: flex;
+ flex-direction: row;
+ align-items: center;
+ gap: 5px;
+}
+
+.navTitle {
+ font-family: 'Suez One';
+ font-style: normal;
+ font-weight: 400;
+ font-size: 24px;
+ line-height: 31px;
+ letter-spacing: -0.02em;
+}
+
+.imageContainer {
+ width: 73px;
+ cursor: pointer;
+}
+
+.buttom {
+ box-sizing: border-box;
+ display: flex;
+ flex-direction: row;
+ align-items: center;
+ padding: 4px 8px;
+ background: #ffffff;
+ border: 1px solid #e5e5e5;
+ box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.24);
+ border-radius: 12px;
+ flex: none;
+ gap: 0px;
+
+ order: 0;
+ flex-grow: 0;
+ cursor: pointer;
+}
+
+.buttomText {
+ font-family: 'Syne';
+ font-style: normal;
+ font-weight: 700;
+ font-size: 14px;
+ line-height: 16px;
+ display: flex;
+ align-items: center;
+ text-align: center;
+ letter-spacing: -0.02em;
+ text-transform: uppercase;
+ color: #292929;
+}
+
+.houseImage {
+ height: 12px;
+}
+
+.dropdownContent {
+ font-family: 'Syne';
+ display: flex;
+ margin-top: 8px;
+ position: absolute;
+ background-color: #f9f9f9;
+ box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.24);
+ padding: 4px 8px;
+ border-radius: 8px;
+ z-index: 1;
+ cursor: pointer;
+}
+
+.dropdownContent p {
+ color: black;
+ text-decoration: none;
+ display: block;
+}
+
+@media (min-width: 640px) {
+ .headerContainer {
+  padding: 13.5px 80px;
+  padding-bottom: 26px;
+  gap: 32px;
+  width: 100%;
+ }
+
+ .headerContainer h1 {
+  flex: 1.5;
+  font-size: 36px;
+ }
+
+ .imageContainer {
+  width: 113px;
+ }
+
+ .buttom {
+  gap: 4px;
+ }
+
+ .buttomText {
+  font-size: 18px;
+ }
+
+ .navTitle {
+  font-size: 36px;
+ }
+ .houseImage {
+  height: 16px;
+ }
+
+ .dropdownContent {
+  font-size: 18px;
+ }
+}
+@media (min-width: 1024px) {
+ .headerContainer {
+  background: #ffebe1;
+  padding: 13.5px 80px;
+  padding-bottom: 26px;
+  gap: 32px;
+  width: 100%;
+  max-width: 1300px;
+ }
+
+ .headerContainer h1 {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 46px;
+  line-height: 60px;
+  letter-spacing: -0.02em;
+ }
+
+ .imageContainer {
+  width: 143px;
+ }
+
+ .navTitle {
+  font-size: 46px;
+ }
+
+ .buttomText {
+  font-size: 24px;
+ }
+
+ .houseImage {
+  height: 24px;
+ }
+ .dropdownContent {
+  font-size: 20px;
+ }
+}

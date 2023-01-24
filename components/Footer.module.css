@@ -1,0 +1,30 @@
+.footerContainer {
+ background-color: #ffebe1;
+ padding: 10px 0;
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ font-family: 'Syne';
+ font-style: normal;
+ font-weight: 400;
+ font-size: 14px;
+ line-height: 28px;
+}
+
+.authorFooter {
+ color: #25a3a3;
+ text-decoration-line: underline;
+}
+
+@media (min-width: 640px) {
+ .footerContainer {
+  padding: 10px 0;
+  font-size: 18px;
+ }
+}
+@media (min-width: 1024px) {
+ .footerContainer {
+  padding: 10px 0;
+  font-size: 24px;
+ }
+}
