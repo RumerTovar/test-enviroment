@@ -1,11 +1,15 @@
+import axios from 'axios';
+
 const endpoint = process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT;
+const url = `${process.env.NEXT_PUBLIC_LOCAL_HOMEPAGE}/api/activationEmail`;
 
 export const DgraphSignUp = (
  form,
  setErrors,
  setSignUpModalIsOpen,
- setIsOpen,
- validateForm
+ setVerificationModal,
+ validateForm,
+ activationToken
 ) => {
  async function fetchGraphQL(operationsDoc, operationName, variables) {
   const result = await fetch(endpoint, {
@@ -24,8 +28,8 @@ export const DgraphSignUp = (
  }
 
  const operationsDoc = `
-   mutation MyMutation($firstName: String!, $lastName: String!, $email: String!, $pwd: String!) {
-     addAuthors(input: {firstName: $firstName, lastName: $lastName, email: $email, singInProvider: Local, simpleUser: true, collaborator: false, superUser: false, active: true, pwd: $pwd}) {
+   mutation MyMutation($firstName: String!, $lastName: String!, $email: String!, $pwd: String! $activationToken: String!) {
+     addAuthors(input: {firstName: $firstName, lastName: $lastName, email: $email, singInProvider: Local, simpleUser: true, collaborator: false, superUser: false, active: false, pwd: $pwd, activationToken: $activationToken}) {
        authors {
          email
        }
@@ -39,6 +43,7 @@ export const DgraphSignUp = (
    lastName: form.lastName,
    email: form.email,
    pwd: form.password,
+   activationToken: activationToken,
   });
  }
 
@@ -48,10 +53,14 @@ export const DgraphSignUp = (
   if (error) {
    return setErrors(validateForm(form, 'email', error));
   }
-
   setSignUpModalIsOpen(false);
-  setIsOpen(true);
-  console.log(data);
+  setVerificationModal(true);
+  const res = await axios.post(url, {
+   email: form.email,
+   activationToken,
+  });
+
+  console.log(data, res);
  }
 
  startExecuteMyMutation();

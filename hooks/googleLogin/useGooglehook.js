@@ -1,12 +1,19 @@
 import { useGoogleLogin } from '@react-oauth/google';
 import axios from 'axios';
 import { useContext } from 'react';
+import EmailContext from '../../context/EmailContext';
 import UserContext from '../../context/UserContext';
 import { DgraphSignUp } from './DgraphSignUp';
 
 const googleUrl = 'https://www.googleapis.com/oauth2/v3/userinfo';
 
-export const useGooglehook = (setIsOpen, setLoginError) => {
+export const useGooglehook = (
+ setIsOpen,
+ setLoginError,
+ setVerificationModal
+) => {
+ const { setEmail } = useContext(EmailContext);
+
  const { setUser } = useContext(UserContext);
 
  const login = useGoogleLogin({
@@ -20,7 +27,9 @@ export const useGooglehook = (setIsOpen, setLoginError) => {
 
     const { data } = res;
 
-    DgraphSignUp(data, setUser, setIsOpen, setLoginError);
+    setEmail(data.email);
+
+    DgraphSignUp(data, setUser, setIsOpen, setLoginError, setVerificationModal);
    } catch (error) {
     console.error(error);
    }

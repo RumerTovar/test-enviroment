@@ -1,10 +1,13 @@
+import { rensendCode } from '../activateAccount/resendCode';
+
 const endpoint = process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT;
 
 export const DgraphAuthentication = (
  email,
  setUser,
  setIsOpen,
- setLoginError
+ setLoginError,
+ setVerificationModal
 ) => {
  async function fetchGraphQL(operationsDoc, operationName, variables) {
   const result = await fetch(endpoint, {
@@ -27,6 +30,7 @@ export const DgraphAuthentication = (
     getAuthors(email: $email) {
       firstName
       lastName
+      active
     }
   }
 `;
@@ -47,6 +51,13 @@ export const DgraphAuthentication = (
    return setLoginError('Something went wrong try again');
   }
 
+  if (!getAuthors.active) {
+   rensendCode(email);
+   setIsOpen(false);
+   return setVerificationModal(true);
+  }
+
+  console.log(getAuthors);
   window.localStorage.setItem('loggedAppUser', JSON.stringify(getAuthors));
   setUser(getAuthors);
   setIsOpen(false);

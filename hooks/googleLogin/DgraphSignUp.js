@@ -3,7 +3,13 @@ import { DgraphLogIn } from './DgraphLogIn';
 
 const endpoint = process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT;
 
-export const DgraphSignUp = (data, setUser, setIsOpen, setLoginError) => {
+export const DgraphSignUp = (
+ data,
+ setUser,
+ setIsOpen,
+ setLoginError,
+ setVerificationModal
+) => {
  async function fetchGraphQL(operationsDoc, operationName, variables) {
   const result = await fetch(endpoint, {
    method: 'POST',
@@ -22,7 +28,7 @@ export const DgraphSignUp = (data, setUser, setIsOpen, setLoginError) => {
 
  const operationsDoc = `
    mutation MyMutation($firstName: String!, $lastName: String!, $email: String!, $password: String!) {
-     addAuthors(input: {firstName: $firstName, lastName: $lastName, email: $email, singInProvider: Google, simpleUser: true, collaborator: false, superUser: false, active: true, pwd: $password}) {
+     addAuthors(input: {firstName: $firstName, lastName: $lastName, email: $email, singInProvider: Google, simpleUser: true, collaborator: false, superUser: false, active: false, pwd: $password}) {
        authors {
          email
        }
@@ -50,12 +56,18 @@ export const DgraphSignUp = (data, setUser, setIsOpen, setLoginError) => {
     error[0].message ===
     `couldn't rewrite mutation addAuthors because failed to rewrite mutation payload because id ${email} already exists for field email inside type Authors`
    ) {
-    DgraphAuthentication(email, setUser, setIsOpen, setLoginError);
+    DgraphAuthentication(
+     email,
+     setUser,
+     setIsOpen,
+     setLoginError,
+     setVerificationModal
+    );
    }
    return setLoginError('Something went wrong, try again');
   }
 
-  DgraphLogIn(data, setUser, setIsOpen, setLoginError);
+  DgraphLogIn(data, setUser, setIsOpen, setLoginError, setVerificationModal);
   console.log('console', registerData);
  }
 

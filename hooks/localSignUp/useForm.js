@@ -1,6 +1,11 @@
 import { useState } from 'react';
 import { validateForm } from './validateForm';
 import { DgraphSignUp } from './DgraphSignUp';
+import axios from 'axios';
+import { useContext } from 'react';
+import EmailContext from '../../context/EmailContext';
+
+const url = `${process.env.NEXT_PUBLIC_LOCAL_HOMEPAGE}/api/activationToken`;
 
 const initialForm = {
  firstName: '',
@@ -11,9 +16,11 @@ const initialForm = {
  confirmPassword: '',
 };
 
-export const useForm = (setSignUpModalIsOpen, setIsOpen) => {
+export const useForm = (setSignUpModalIsOpen, setVerificationModal) => {
  const [form, setForm] = useState(initialForm);
  const [errors, setErrors] = useState({});
+
+ const { setEmail } = useContext(EmailContext);
 
  const handleChange = (e) => {
   const { name, value } = e.target;
@@ -33,7 +40,7 @@ export const useForm = (setSignUpModalIsOpen, setIsOpen) => {
   });
  };
 
- const handleSubmit = (e) => {
+ const handleSubmit = async (e) => {
   e.preventDefault();
   setErrors(validateForm(form, undefined));
   if (
@@ -43,7 +50,23 @@ export const useForm = (setSignUpModalIsOpen, setIsOpen) => {
    errors.password === true &&
    errors.confirmPassword === true
   ) {
-   DgraphSignUp(form, setErrors, setSignUpModalIsOpen, setIsOpen, validateForm);
+   try {
+    const {
+     data: { activationToken },
+    } = await axios(url);
+
+    DgraphSignUp(
+     form,
+     setErrors,
+     setSignUpModalIsOpen,
+     setVerificationModal,
+     validateForm,
+     activationToken
+    );
+    setEmail(form.email);
+   } catch (error) {
+    console.error(error);
+   }
   } else {
    return console.log('wrong form');
   }

@@ -1,4 +1,5 @@
 import { useContext, useState } from 'react';
+import EmailContext from '../../context/EmailContext';
 import UserContext from '../../context/UserContext';
 import { DgraphLogIn } from './DgraphLogIn';
 import { validateForm } from './validateForm';
@@ -8,9 +9,10 @@ const initialForm = {
  password: '',
 };
 
-export const useForm = (setIsOpen, setLoginError) => {
+export const useForm = (setIsOpen, setLoginError, setVerificationModal) => {
  const [form, setForm] = useState(initialForm);
  const [errors, setErrors] = useState({});
+ const { setEmail } = useContext(EmailContext);
 
  const { setUser } = useContext(UserContext);
 
@@ -36,7 +38,8 @@ export const useForm = (setIsOpen, setLoginError) => {
   e.preventDefault();
   setErrors(validateForm(form, undefined));
   if (errors.email === true && errors.password === true) {
-   DgraphLogIn(form, setLoginError, setUser, setIsOpen);
+   setEmail(form.email);
+   DgraphLogIn(form, setLoginError, setUser, setIsOpen, setVerificationModal);
   } else {
    return setLoginError('Invalid email or password');
   }

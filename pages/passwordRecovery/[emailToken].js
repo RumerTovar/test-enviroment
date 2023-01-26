@@ -20,13 +20,6 @@ export default function ChangePassword({ userEmail, isValidToken }) {
 
 ChangePassword.getInitialProps = async ({ query }) => {
  try {
-  /* aqui vamos a recibir la url corta
-la vamos a enviar a la base de datos 
-para que nos devuelva la url real
-y seguir con este flujo que ya esta establecido 
--si es falso que devuelva 404
-- si es true que siga este flujo
-*/
   const sendShortURL = await axios.post(`${url}/api/shortURL`, {
    token: query.emailToken,
   });

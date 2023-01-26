@@ -6,12 +6,15 @@ import InputSelect from './InputSelect';
 import { useForm } from '../../hooks/localSignUp/useForm';
 import Image from 'next/image';
 
-export default function SignUpModal({ setSignUpModalIsOpen, setIsOpen }) {
+export default function SignUpModal({
+ setSignUpModalIsOpen,
+ setVerificationModal,
+}) {
  const refModal = useRef();
 
  const { form, errors, handleChange, handleBlur, handleSubmit } = useForm(
   setSignUpModalIsOpen,
-  setIsOpen
+  setVerificationModal
  );
 
  useEffect(() => {

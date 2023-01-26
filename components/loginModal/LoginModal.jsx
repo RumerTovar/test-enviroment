@@ -9,16 +9,21 @@ import Image from 'next/image';
 
 export default function Modal({
  setIsOpen,
-
  setSignUpModalIsOpen,
  setPasswordForgottenModal,
+ setVerificationModal,
 }) {
  const [loginError, setLoginError] = useState(false);
  const { form, errors, handleChange, handleBlur, handleSubmit } = useForm(
   setIsOpen,
-  setLoginError
+  setLoginError,
+  setVerificationModal
  );
- const { login } = useGooglehook(setIsOpen, setLoginError);
+ const { login } = useGooglehook(
+  setIsOpen,
+  setLoginError,
+  setVerificationModal
+ );
 
  const refModal = useRef();
 

@@ -1,6 +1,14 @@
+import { rensendCode } from '../activateAccount/resendCode';
+
 const endpoint = process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT;
 
-export const DgraphLogIn = (data, setUser, setIsOpen, setLoginError) => {
+export const DgraphLogIn = (
+ data,
+ setUser,
+ setIsOpen,
+ setLoginError,
+ setVerificationModal
+) => {
  async function fetchGraphQL(operationsDoc, operationName, variables) {
   const result = await fetch(endpoint, {
    method: 'POST',
@@ -23,6 +31,7 @@ export const DgraphLogIn = (data, setUser, setIsOpen, setLoginError) => {
       email
       firstName
       lastName
+      active
     }
   }
 `;
@@ -47,6 +56,12 @@ export const DgraphLogIn = (data, setUser, setIsOpen, setLoginError) => {
 
   if (!checkAuthorsPassword) {
    return setLoginError('Something went wrong try again');
+  }
+
+  if (!checkAuthorsPassword.active) {
+   rensendCode(data.email);
+   setIsOpen(false);
+   return setVerificationModal(true);
   }
 
   window.localStorage.setItem(
