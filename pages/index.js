@@ -7,7 +7,7 @@ import PasswordForgotten from '../components/passwordForgotten/PasswordForgotten
 import SignUpModal from '../components/signUpModal/SignUpModal';
 import styles from './index.module.css';
 import UserContext from '../context/UserContext';
-import VerificationModal from '../components/verificationModal/verificationModal';
+import VerificationModal from '../components/verificationModal/VerificationModal';
 
 export default function Home() {
  const [isOpen, setIsOpen] = useState(false);
